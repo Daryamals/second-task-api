@@ -23,32 +23,21 @@ jobs:
       - name: Start API Server
         run: |
           git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
+          
           cd simbirsoft_sdet_project
-          make run
-          mvn clean package -DskipTests
+          mvn clean package
+          
           nohup java -jar target/simbirsoft_sdet_project-*.jar &
-          timeout 120 bash -c 'while ! curl -s http://localhost:8080/actuator/health >/dev/null; do sleep 2; done'
+          
+          echo "Ожидаем запуск сервера..."
+          timeout 60 bash -c 'while ! nc -z localhost 8080; do sleep 1; done'
+          echo "Сервер запущен!"  
 
       - name: Build and run tests
-        run: |
-          cd $GITHUB_WORKSPACE
-          mvn clean test
+        run: mvn clean test
 
       - name: Install Allure
         run: |
           sudo apt-get update
           wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
           sudo dpkg -i allure_2.24.0-1_all.deb
-
-      - name: Generate Allure Report
-        if: always()
-        run: |
-          allure generate target/allure-results --clean -o allure-report
-
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-report
-          path: allure-report
-          retention-days: 1
