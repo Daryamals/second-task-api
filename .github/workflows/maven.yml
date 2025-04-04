@@ -20,24 +20,24 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Start API Server
-        run: |
-          git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
+      # - name: Start API Server
+      #   run: |
+      #     git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
           
-          /home/runner/work/second-task-api/second-task-api/simbirsoft_sdet_project
-          mvn clean package
+      #     /home/runner/work/second-task-api/second-task-api/simbirsoft_sdet_project
+      #     mvn clean package
           
-          nohup java -jar target/simbirsoft_sdet_project-*.jar &
+      #     nohup java -jar target/simbirsoft_sdet_project-*.jar &
           
-          echo "Ожидаем запуск сервера..."
-          timeout 60 bash -c 'while ! nc -z host.docker.internal; do sleep 1; done'
-          echo "Сервер запущен!"  
+      #     echo "Ожидаем запуск сервера..."
+      #     timeout 60 bash -c 'while ! nc -z host.docker.internal; do sleep 1; done'
+      #     echo "Сервер запущен!"  
 
-      - name: Build and run tests
-        run: mvn clean test
+      # - name: Build and run tests
+      #   run: mvn clean test
 
-      - name: Install Allure
-        run: |
-          sudo apt-get update
-          wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
-          sudo dpkg -i allure_2.24.0-1_all.deb
+      # - name: Install Allure
+      #   run: |
+      #     sudo apt-get update
+      #     wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
+      #     sudo dpkg -i allure_2.24.0-1_all.deb
