@@ -24,7 +24,7 @@ jobs:
         run: |
           git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
           
-          cd simbirsoft_sdet_project
+          /home/runner/work/second-task-api/second-task-api/simbirsoft_sdet_project
           mvn clean package
           
           nohup java -jar target/simbirsoft_sdet_project-*.jar &
