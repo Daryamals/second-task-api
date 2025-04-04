@@ -5,11 +5,6 @@
 	<groupId>com.daryamals</groupId>
 	<artifactId>second-task-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
-	<properties>
-		<allure.results.directory>allure-results</allure.results.directory>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>io.rest-assured</groupId>
@@ -47,9 +42,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.daryamals</groupId>
-			<artifactId>first-task-ui</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 	</dependencies>
 	<build>
