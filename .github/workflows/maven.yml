@@ -30,7 +30,7 @@ jobs:
           nohup java -jar target/simbirsoft_sdet_project-*.jar &
           
           echo "Ожидаем запуск сервера..."
-          timeout 60 bash -c 'while ! nc -z localhost 8080; do sleep 1; done'
+          timeout 60 bash -c 'while ! nc -z host.docker.internal; do sleep 1; done'
           echo "Сервер запущен!"  
 
       - name: Build and run tests
