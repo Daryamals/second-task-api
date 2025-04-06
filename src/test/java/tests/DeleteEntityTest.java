@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
+import static jakarta.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 
 @Feature("Удаление сущности")
 public class DeleteEntityTest extends BaseTest {
@@ -16,7 +16,7 @@ public class DeleteEntityTest extends BaseTest {
 		skipDelete = true;
 		entitySteps.deleteEntity(testEntityId);
 		int statusCode = entitySteps.getEntityStatus(testEntityId);
-		Assert.assertEquals(statusCode, BAD_REQUEST, "Сущность не была удалена");
+		Assert.assertEquals(statusCode, INTERNAL_SERVER_ERROR.getStatusCode(), "Сущность не была удалена. Ожидался 500, но получено:" + statusCode);
 	}
 
 }

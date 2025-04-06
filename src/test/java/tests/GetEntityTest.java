@@ -1,11 +1,11 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import dtos.EntityResponse;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import dtos.EntityResponse;
 
 @Feature("Получение сущности")
 public class GetEntityTest extends BaseTest {
@@ -17,6 +17,5 @@ public class GetEntityTest extends BaseTest {
 		Assert.assertEquals(entityResponse.getId(), testEntityId, "ID сущности не совпадает");
 		Assert.assertEquals(entityResponse.getTitle(), testEntity.getTitle(), "Заголовок сущности не совпадает");
 		Assert.assertEquals(entityResponse.isVerified(), testEntity.isVerified(), "Флаг verified не совпадает");
-		entitySteps.deleteEntity(testEntityId);
 	}
 }

@@ -7,6 +7,8 @@ import com.github.javafaker.Faker;
 
 public class TestDataGeneration {
 	private static final Faker faker = new Faker();
+	public static final int PAGE = 1;
+	public static final int PER_PAGE = 10;
 
 	public static EntityRequest generateEntity() {
 		AdditionRequest addition = new AdditionRequest();
