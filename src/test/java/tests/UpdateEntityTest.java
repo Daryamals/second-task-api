@@ -1,15 +1,12 @@
 package tests;
 
-import static io.restassured.RestAssured.given;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import io.qameta.allure.*;
-import io.restassured.http.ContentType;
-import dtos.EntityRequest;
-import dtos.EntityResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import data.TestDataGeneration;
-import static helpers.APIEndpoints.UPDATE;
-import helpers.EntitySteps;
-import static jakarta.ws.rs.core.Response.Status.NO_CONTENT;
+import dtos.EntityResponse;
 
 @Feature("Обновление сущности")
 public class UpdateEntityTest extends BaseTest {
@@ -18,14 +15,12 @@ public class UpdateEntityTest extends BaseTest {
 	@Story("Частичное обновление сущности через API")
 	@Description("Тест проверяет успешное частичное обновление сущности")
 	public void testUpdateEntity() {
-		EntityRequest entity = TestDataGeneration.generateEntity();
-		int entityId = EntitySteps.createEntity(entity);
-		EntityRequest updatedEntity = TestDataGeneration.generateEntity();
-		given().pathParam("id", entityId).contentType(ContentType.JSON).body(updatedEntity).when().patch(UPDATE).then()
-				.statusCode(NO_CONTENT.getStatusCode());
-		EntityResponse updatedResponse = EntitySteps.getEntity(entityId);
-		assert updatedResponse.getTitle().equals(updatedEntity.getTitle());
-		assert updatedResponse.isVerified() == updatedEntity.isVerified();
-		EntitySteps.deleteEntity(entityId);
+		testEntity = TestDataGeneration.generateEntity();
+		entitySteps.updateEntity(testEntityId, testEntity);
+
+		EntityResponse updatedResponse = entitySteps.getEntity(testEntityId);
+
+		Assert.assertEquals(updatedResponse.getTitle(), testEntity.getTitle(), "Заголовки не совпадают");
+		Assert.assertEquals(updatedResponse.isVerified(), testEntity.isVerified(), "Статусы верификации не совпадают");
 	}
 }
