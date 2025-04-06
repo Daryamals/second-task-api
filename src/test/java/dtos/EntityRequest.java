@@ -8,12 +8,13 @@ import java.util.List;
 @Getter
 @Setter
 public class EntityRequest {
-	@JsonProperty("addition")
+
 	private AdditionRequest addition;
+
 	@JsonProperty("important_numbers")
 	private List<Integer> importantNumbers;
-	@JsonProperty("title")
+
 	private String title;
-	@JsonProperty("verified")
+
 	private boolean verified;
 }

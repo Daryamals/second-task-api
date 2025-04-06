@@ -7,10 +7,9 @@ import io.restassured.http.ContentType;
 import dtos.EntityRequest;
 import dtos.EntityResponse;
 import data.TestDataGeneration;
-import helpers.APIEndpoints;
-import helpers.BaseRequest;
-import static data.ResponseCodes.OK;
-import static data.ResponseCodes.NO_CONTENT;
+import static helpers.APIEndpoints.UPDATE;
+import helpers.EntitySteps;
+import static jakarta.ws.rs.core.Response.Status.NO_CONTENT;
 
 @Feature("Обновление сущности")
 public class UpdateEntityTest extends BaseTest {
@@ -19,19 +18,14 @@ public class UpdateEntityTest extends BaseTest {
 	@Story("Частичное обновление сущности через API")
 	@Description("Тест проверяет успешное частичное обновление сущности")
 	public void testUpdateEntity() {
-		Allure.step("Создание тестовой сущности");
 		EntityRequest entity = TestDataGeneration.generateEntity();
-		int entityId = BaseRequest.createEntity(entity);
-		Allure.step("Генерация обновленных данных");
+		int entityId = EntitySteps.createEntity(entity);
 		EntityRequest updatedEntity = TestDataGeneration.generateEntity();
-		Allure.step("Отправка PATCH-запроса на частичное обновление сущности");
 		given().pathParam("id", entityId).contentType(ContentType.JSON).body(updatedEntity).when().patch(UPDATE).then()
-				.statusCode(NO_CONTENT);
-		Allure.step("Проверка, что данные успешно обновлены");
-		EntityResponse updatedResponse = BaseRequest.getEntity(entityId);
+				.statusCode(NO_CONTENT.getStatusCode());
+		EntityResponse updatedResponse = EntitySteps.getEntity(entityId);
 		assert updatedResponse.getTitle().equals(updatedEntity.getTitle());
 		assert updatedResponse.isVerified() == updatedEntity.isVerified();
-		Allure.step("Удаление тестовой сущности");
-		BaseRequest.deleteEntity(entityId);
+		EntitySteps.deleteEntity(entityId);
 	}
 }
