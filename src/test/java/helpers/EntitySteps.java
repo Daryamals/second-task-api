@@ -10,11 +10,11 @@ import dtos.EntityRequest;
 import dtos.EntityResponse;
 import static data.TestDataGeneration.PAGE;
 import static data.TestDataGeneration.PER_PAGE;
-import static helpers.APIEndpoints.CREATE;
-import static helpers.APIEndpoints.DELETE;
-import static helpers.APIEndpoints.GET;
-import static helpers.APIEndpoints.GET_ALL;
-import static helpers.APIEndpoints.UPDATE;
+import static helpers.ApiEndpoints.CREATE;
+import static helpers.ApiEndpoints.DELETE;
+import static helpers.ApiEndpoints.GET;
+import static helpers.ApiEndpoints.GET_ALL;
+import static helpers.ApiEndpoints.UPDATE;
 
 public class EntitySteps {
 

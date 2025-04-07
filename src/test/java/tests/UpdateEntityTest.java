@@ -1,15 +1,25 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import data.TestDataGeneration;
 import dtos.EntityResponse;
 
 @Feature("Обновление сущности")
 public class UpdateEntityTest extends BaseTest {
+
+	@Step("Подготовка сущности перед тестом")
+	@BeforeMethod
+	public void createTestEntity() {
+		testEntity = TestDataGeneration.generateEntity();
+		testEntityId = entitySteps.createEntity(testEntity);
+	}
 
 	@Test
 	@Story("Частичное обновление сущности через API")
@@ -22,5 +32,11 @@ public class UpdateEntityTest extends BaseTest {
 
 		Assert.assertEquals(updatedResponse.getTitle(), testEntity.getTitle(), "Заголовки не совпадают");
 		Assert.assertEquals(updatedResponse.isVerified(), testEntity.isVerified(), "Статусы верификации не совпадают");
+	}
+
+	@Step("Очистка тестовых данных после теста")
+	@AfterMethod
+	public void deleteTestEntity() {
+		entitySteps.deleteEntity(testEntityId);
 	}
 }
