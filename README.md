@@ -1,2 +1,49 @@
-# second-task-api
-Project for online workshop SDET(Simbirsoft)
+# SimbirSoft SDET API Testing Project
+
+## Описание проекта
+Этот проект содержит API-тесты для приложения, созданные с использованием **Java 17, Rest Assured и TestNG**.  
+Тесты проверяют основные API-эндпоинты приложения, включая создание, получение, обновление и удаление сущностей.
+
+## Используемые технологии
+- **Java 17**
+- **Rest Assured** – для тестирования API
+- **TestNG** – тестовый фреймворк
+- **Jackson** – для сериализации/десериализации JSON
+- **Allure** – для формирования отчетов
+- **GitHub Actions** – для автоматического запуска тестов в CI/CD
+
+---
+
+## Установка и запуск тестов
+
+### **1. Клонирование репозитория**
+```sh
+git clone https://github.com/ВАШ_РЕПОЗИТОРИЙ/simbirsoft_sdet_project.git
+cd simbirsoft_sdet_project
+```
+
+### **2. Установка зависимостей**
+```sh
+mvn clean install -DskipTests
+```
+
+### **3. Запуск тестов**
+```sh
+mvn test
+```
+
+### **4. Генерация Allure-отчета**
+```sh
+mvn allure:serve
+```
+После выполнения откроется веб-страница с отчетом о тестах.
+
+---
+
+## CI/CD (GitHub Actions)
+Каждый **push** или **pull request** в master автоматически запускает тесты через **GitHub Actions**.
+
+### **Как проверить CI/CD?**
+1. Перейти в репозиторий на GitHub -> вкладка **"Actions"**.
+2. Найти workflow и открыть последний
+
