@@ -27,8 +27,9 @@ jobs:
           wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
           sudo dpkg -i allure_2.24.0-1_all.deb
 
-      - name: Run API tests
-        run: mvn clean test -Dbase.url=http://localhost:8080
+      - name: Run tests
+        run: mvn clean test -Dbase.base.url
+
 
       - name: Generate Allure report
         run: mvn allure:report
