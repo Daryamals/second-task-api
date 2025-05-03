@@ -18,7 +18,7 @@
 
 ### **1. Клонирование репозитория**
 ```sh
-git clone https://github.com/ВАШ_РЕПОЗИТОРИЙ/simbirsoft_sdet_project.git
+git clone https://github.com/daryamals/simbirsoft_sdet_project.git
 cd simbirsoft_sdet_project
 ```
 
