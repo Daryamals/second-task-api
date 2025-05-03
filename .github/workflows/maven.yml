@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,24 +21,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # - name: Start API Server
-      #   run: |
-      #     git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
-          
-      #     /home/runner/work/second-task-api/second-task-api/simbirsoft_sdet_project
-      #     mvn clean package
-          
-      #     nohup java -jar target/simbirsoft_sdet_project-*.jar &
-          
-      #     echo "Ожидаем запуск сервера..."
-      #     timeout 60 bash -c 'while ! nc -z host.docker.internal; do sleep 1; done'
-      #     echo "Сервер запущен!"  
+      - name: Install Allure CLI
+        run: |
+          sudo apt-get update
+          wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
+          sudo dpkg -i allure_2.24.0-1_all.deb
 
-      # - name: Build and run tests
-      #   run: mvn clean test
+      # - name: Run tests
+      #   run: mvn clean test -Dbase.base.url
 
-      # - name: Install Allure
-      #   run: |
-      #     sudo apt-get update
-      #     wget https://github.com/allure-framework/allure2/releases/download/2.24.0/allure_2.24.0-1_all.deb
-      #     sudo dpkg -i allure_2.24.0-1_all.deb
+
+      # - name: Generate Allure report
+      #   run: mvn allure:report
+
+      # - name: Upload Allure report as artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: allure-report
+      #     path: target/site/allure-maven-plugin

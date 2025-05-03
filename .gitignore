@@ -1,0 +1,7 @@
+/target/
+/test-output/
+/allure-result/
+/.settings/
+.classpath
+.project
+.clang-format
